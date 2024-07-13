@@ -34,5 +34,8 @@ const renderPartyList = () => {
   // Add them inside parent
   ul.innerHTML = partyList.join(``);
 }
-
-// Each event is an object with details about the event. We have the option of using those details later.
+// When you click on a party on the list, the page switches to details about that party.
+  // Put event listener on ul that acts on click.
+  // The LIs inside it are the targets for the click event.
+  // Find the party object in the parties array that matches the party 
+  // Replace ul.innerHTML with the details of the party: name, date, description, location. 
