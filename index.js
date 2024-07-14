@@ -33,6 +33,38 @@ const renderPartyList = () => {
   
   // Add them inside parent
   ul.innerHTML = partyList.join(``);
+
+  // When you click on a party on the list, the page switches to details about that party.
+  // Grab list items
+  const partyListItems = document.querySelectorAll(`li`);
+  // Put event listener on LIs that acts on click.
+  partyListItems.forEach((partyLI) => {
+    // The LIs inside it are the targets for the click event.
+    partyLI.addEventListener(`click`, (event) => {
+      const partyName = event.target.innerText;
+
+      // Find the party object in the parties array that matches the name clicked on 
+      const clickedParty = state.parties.find((party) => {
+        return party.name === partyName;
+      })
+      
+      // Replace main.innerHTML with the details of the party and a back button. 
+      main.innerHTML = `
+      <p>This party is called ${partyName}.</p>
+      <p>The date of the party is ${clickedParty.date}.</p>
+      <p>It's being held at ${clickedParty.location}.</p>
+      <p>Here's what's happening: ${clickedParty.description}.</p>
+      <button>Back to Party List</button>
+    `
+
+      const backButton = document.querySelector(`button`);
+      
+      backButton.addEventListener(`click`, () => {
+        main.innerHTML = ``;
+        renderPartyList();
+      })
+
+    })
+  })
 }
 
-// Each event is an object with details about the event. We have the option of using those details later.
